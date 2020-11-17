@@ -1,14 +1,18 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Inventory {
 
 	private Hashtable<String, Product> registeredProducts;
 	private Hashtable<String, Product> stock;
+	private ArrayList<Transaction> transactions;
+	private TreeSet<Transaction> trans;
 	
 	public Inventory() {
 		this.registeredProducts = new Hashtable<String, Product>();
@@ -67,18 +71,19 @@ public class Inventory {
 	public List<Product> getStringStockProducts(){
 		
 		List<Product> aux2 = stock.values().stream().collect(Collectors.toList());
-//		aux2.sort(new Comparator<String>() {
-//			@Override
-//			public int compare(String arg0, String arg1) {
-//				return arg0.compareTo(arg1);
-//			}
-//		});
+
 		
 		return aux2;
 	}
 	
 	public List<String> getStockString(){
 		List<String> aux = stock.keySet().stream().collect(Collectors.toList());
+		aux.sort(new Comparator<String>() {
+			@Override
+			public int compare(String arg0, String arg1) {
+				return arg0.compareTo(arg1);
+			}
+		});
 		return aux;
 	}
 }
