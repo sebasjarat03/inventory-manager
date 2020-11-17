@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import model.Inventory;
 
 public class PrincipalController {
 	
@@ -16,11 +17,13 @@ public class PrincipalController {
 	
 	private InventoryController ic;
 	
+	private Inventory inventory;
+	
 	private VBox createProduct;
 	private VBox inventoryWindow;
 	
-	public PrincipalController() {
-		
+	public PrincipalController(Inventory inventory) {
+		this.inventory = inventory;
 	}
 	@FXML
 	private JFXButton addBut;
@@ -40,14 +43,15 @@ public class PrincipalController {
 	@FXML
 	void inventAct(ActionEvent event) {
 		mainPane.setCenter(inventoryWindow);
+		ic.initializeTV();
 
 	}
 	
 	 
 	
 	public void whenInitialize() {
-		cp = new CreateProductController();
-		ic = new InventoryController();
+		cp = new CreateProductController(inventory);
+		ic = new InventoryController(inventory);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addProductWindow.fxml"));
 		
 		

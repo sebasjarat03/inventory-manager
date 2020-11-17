@@ -2,8 +2,10 @@ package ui.productsoperations;
 
 import java.io.IOException;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,13 +13,18 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Inventory;
+import ui.InventoryController;
 
 public class BuyProductController {
-	
+	private Inventory inventory;
+	private InventoryController ic;
 	
 	VBox buyProductPane;
-	public BuyProductController() {
-		// TODO Auto-generated constructor stub
+	
+	public BuyProductController(Inventory inventory, InventoryController ic) {
+		this.inventory = inventory;
+		this.ic = ic;
 	}
 
 	@FXML
@@ -30,7 +37,22 @@ public class BuyProductController {
     private JFXTextField unitPriceField;
 
 	
-	private Stage buyProductWindow;
+    private Stage buyProductWindow;
+
+    @FXML
+    private JFXButton buyBut;
+
+    @FXML
+    void buyAct(ActionEvent event) {
+    	String productName = menuProducts.getSelectionModel().getSelectedItem();
+    	int amount = Integer.parseInt(unitsNumField.getText());
+    	double pricePerUnit = Double.parseDouble(unitPriceField.getText());
+    	inventory.buy(productName, amount, pricePerUnit);
+    	ic.actualizeTV();
+    	menuProducts.getSelectionModel().clearSelection();
+    	unitsNumField.setText("");
+    	unitPriceField.setText("");
+    }
 	
 	public void buyProduct() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BuyProductWindow.fxml"));
@@ -50,7 +72,7 @@ public class BuyProductController {
     	
     	buyProductWindow.show();
     	
-    	menuProducts.getItems().setAll();
+    	menuProducts.getItems().setAll(inventory.getStringRegisteredProducts());
 	}
 
 

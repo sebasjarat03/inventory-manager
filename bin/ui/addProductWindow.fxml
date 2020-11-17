@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
@@ -22,6 +21,11 @@
                   </Label>
                   <JFXTextField fx:id="nameField" layoutX="416.0" layoutY="251.0" prefHeight="31.0" prefWidth="233.0" />
                   <JFXButton fx:id="addBut" layoutX="388.0" layoutY="387.0" onAction="#addAct" style="-fx-background-color: #c4cacc#c4cacc;" text="Crear" />
+                  <Label layoutX="266.0" layoutY="62.0" text="CREAR UN PRODUCTO">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </top>

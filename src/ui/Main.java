@@ -6,14 +6,16 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Inventory;
 
 public class Main extends Application{
 
 	PrincipalController principalController;
-	double yOffset, xOffset;
+	Inventory inventory;
 
 	public Main() {
-		principalController = new PrincipalController();
+		inventory = new Inventory();
+		principalController = new PrincipalController(inventory);
 	}
 
 	public static void main(String[] args) {
