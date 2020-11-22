@@ -58,14 +58,14 @@ public class InventoryController {
 	}
 	
 	public void initializeTV() {
-		ObservableList<Product> data = FXCollections.observableArrayList(inventory.getStringStockProducts());
+		ObservableList<Product> data = FXCollections.observableArrayList(inventory.getStockProducts());
 		nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 		unitCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
 		prodTable.getItems().setAll(data);
 	}
 	
 	public void actualizeTV() {
-		ObservableList<Product> data = FXCollections.observableArrayList(inventory.getStringStockProducts());
+		ObservableList<Product> data = FXCollections.observableArrayList(inventory.getStockProducts());
 		prodTable.getItems().setAll(data);
 	}
 

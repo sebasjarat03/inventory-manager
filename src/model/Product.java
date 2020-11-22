@@ -1,22 +1,35 @@
 package model;
 
-public class Product {
+import java.util.ArrayList;
 
-	private String name;
-	private int amount;
+import model.Transaction.TransactionType;
+
+public class Product {
 	
-	public Product(String name, int amount) {
+	private String name;
+	private int units;
+	private ArrayList<Transaction> transactions;
+	
+	public Product(String name, int units) {
 		super();
 		this.name = name;
-		this.amount = amount;
+		this.units = units;
+		this.transactions = new ArrayList<Transaction>();
 	}
 
-	public void addUnits(int amount) {
-		this.amount += amount;
+	public void buy(int units, double pricePerUnit) {
+		this.units += units;
+		registerTransaction(TransactionType.BUY, units, pricePerUnit);
 	}
-	public void substractUnits(int amount) {
-		this.amount -= amount;
+	public void sell(int units, double pricePerUnit) {
+		this.units -= units;
+		registerTransaction(TransactionType.SELL, units, pricePerUnit);
 	}
+	
+	private void registerTransaction(TransactionType type, int units, double pricePerUnit) {
+		this.transactions.add(new Transaction(type, units, pricePerUnit));
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -25,12 +38,12 @@ public class Product {
 		this.name = name;
 	}
 
-	public int getAmount() {
-		return amount;
+	public int getUnits() {
+		return units;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setUnits(int units) {
+		this.units = units;
 	}
 	
 	

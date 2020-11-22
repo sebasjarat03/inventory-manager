@@ -3,16 +3,28 @@ package model;
 import java.time.LocalDateTime;
 
 public class Transaction {
+	
+	public enum TransactionType{
+		BUY,
+		SELL;
+	}
+	
+	private TransactionType type;
 	private int units;
 	private LocalDateTime date;
 	private double pricePerUnit;
-	private Product product;
 	
-	public Transaction(int units, double pricePerUnits, LocalDateTime date, Product product) {
+	//I dont think we need this constructor
+	public Transaction(TransactionType type, int units, double pricePerUnit, LocalDateTime date) {
 		this.units = units;
-		this.pricePerUnit = pricePerUnits;
+		this.pricePerUnit = pricePerUnit;
 		this.date = date;
-		this.product = product;
+	}
+	
+	public Transaction(TransactionType type, int units, double pricePerUnit) {
+		this.type = type;
+		this.units = units;
+		this.pricePerUnit = pricePerUnit;
 	}
 	
 	
