@@ -49,6 +49,7 @@ public class BuyProductController {
     	double pricePerUnit = Double.parseDouble(unitPriceField.getText());
     	inventory.buy(productName, amount, pricePerUnit);
     	ic.actualizeProducts();
+    	ic.actualizeTV(productName);
     	menuProducts.getSelectionModel().clearSelection();
     	unitsNumField.setText("");
     	unitPriceField.setText("");

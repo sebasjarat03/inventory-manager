@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Inventory;
@@ -76,7 +77,7 @@ public class InventoryController {
 		totalPriceCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 	}
 	
-	private void actualizeTV(String product) {
+	public void actualizeTV(String product) {
 		if(inventory.getProduct(product)!=null) {
 			Product p = inventory.getProduct(product);
 
@@ -90,9 +91,6 @@ public class InventoryController {
 	}
 	
 	public void initialize() {
-		
-		
-		
 		productsChoice.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
 			@Override
@@ -103,7 +101,19 @@ public class InventoryController {
 			}
 		});
 		
-		
+		prodTable.setRowFactory(tv -> new TableRow<Transaction>() {
+		    @Override
+		    public void updateItem(Transaction item, boolean empty) {
+		        super.updateItem(item, empty) ;
+		        if (item == null) {
+		            setStyle("");
+		        } else if (item.getType().equals("BUY")) {
+		            setStyle("-fx-background-color: #bfffd0;");
+		        } else {
+		        	setStyle("-fx-background-color: #ffbfca;");
+		        }
+		    }
+		});
 	}
 
 }

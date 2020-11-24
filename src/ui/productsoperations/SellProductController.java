@@ -51,6 +51,7 @@ public class SellProductController {
     	double pricePerUnit = Double.parseDouble(unitPriceField.getText());
     	inventory.sell(productName, amount, pricePerUnit);
     	ic.actualizeProducts();
+    	ic.actualizeTV(productName);
     	menuProducts.getSelectionModel().clearSelection();
     	unitsNumField.setText("");
     	unitPriceField.setText("");
