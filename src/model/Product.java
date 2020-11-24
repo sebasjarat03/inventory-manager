@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Transaction.TransactionType;
 
@@ -44,6 +45,10 @@ public class Product {
 
 	public void setUnits(int units) {
 		this.units = units;
+	}
+	
+	public List<Transaction> getTransactions(){
+		return this.transactions;
 	}
 	
 	

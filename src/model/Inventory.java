@@ -80,4 +80,8 @@ public class Inventory {
 		List<String> aux = getSellableProducts().stream().map(Product::getName).collect(Collectors.toList());
 		return aux;
 	}
+	
+	public Product getProduct(String name) {
+		return stock.get(name);
+	}
 }

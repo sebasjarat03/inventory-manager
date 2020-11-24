@@ -26,6 +26,28 @@ public class Transaction {
 		this.units = units;
 		this.pricePerUnit = pricePerUnit;
 	}
+
+	public String getType() {
+		return type.toString();
+	}
+
+	public int getUnits() {
+		return units;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public double getPricePerUnit() {
+		return pricePerUnit;
+	}
+	
+	public double getTotalPrice() {
+		return pricePerUnit*units;
+	}
+	
+	
 	
 	
 

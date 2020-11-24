@@ -2,15 +2,19 @@ package ui;
 
 import com.jfoenix.controls.JFXButton;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Inventory;
 import model.Product;
+import model.Transaction;
 import ui.productsoperations.BuyProductController;
 import ui.productsoperations.SellProductController;
 
@@ -27,22 +31,28 @@ public class InventoryController {
 	private SellProductController spc;
 
 	@FXML
-	private TableView<Product> prodTable;
+	private TableView<Transaction> prodTable;
 
 	@FXML
-	private TableColumn<Product, String> nameCol;
+	private TableColumn<Transaction, String> nameCol;
 
 	@FXML
-	private TableColumn<Product, Integer> unitCol;
+	private TableColumn<Transaction, Integer> unitCol;
 
 	@FXML
-	private TableColumn<?, ?> unitPriceCol;
+	private TableColumn<Transaction, Double> unitPriceCol;
+	
+	@FXML
+    private TableColumn<Transaction, Double> totalPriceCol;
 
 	@FXML
 	private JFXButton buyBut;
 
 	@FXML
 	private JFXButton sellBut;
+	
+    @FXML
+    private ChoiceBox<String> productsChoice;
 
 	@FXML
 	void buyAct(ActionEvent event) {
@@ -58,15 +68,42 @@ public class InventoryController {
 	}
 	
 	public void initializeTV() {
-		ObservableList<Product> data = FXCollections.observableArrayList(inventory.getStockProducts());
-		nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-		unitCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
-		prodTable.getItems().setAll(data);
+		productsChoice.getItems().setAll(inventory.getStockString());
+		
+		nameCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+		unitCol.setCellValueFactory(new PropertyValueFactory<>("units"));
+		unitPriceCol.setCellValueFactory(new PropertyValueFactory<>("pricePerUnit"));
+		totalPriceCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
 	}
 	
-	public void actualizeTV() {
-		ObservableList<Product> data = FXCollections.observableArrayList(inventory.getStockProducts());
-		prodTable.getItems().setAll(data);
+	private void actualizeTV(String product) {
+		if(inventory.getProduct(product)!=null) {
+			Product p = inventory.getProduct(product);
+
+			ObservableList<Transaction> data = FXCollections.observableArrayList(p.getTransactions());
+			prodTable.getItems().setAll(data);
+		}
+	}
+	
+	public void actualizeProducts() {
+		productsChoice.getItems().setAll(inventory.getStockString());
+	}
+	
+	public void initialize() {
+		
+		
+		
+		productsChoice.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+				if(arg2!=null) {
+					actualizeTV(arg2);
+				}
+			}
+		});
+		
+		
 	}
 
 }
