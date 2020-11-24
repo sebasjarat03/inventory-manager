@@ -1,7 +1,9 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import model.Transaction.TransactionType;
 
@@ -9,13 +11,13 @@ public class Product {
 	
 	private String name;
 	private int units;
-	private ArrayList<Transaction> transactions;
+	private TreeSet<Transaction> transactions;
 	
 	public Product(String name, int units) {
 		super();
 		this.name = name;
 		this.units = units;
-		this.transactions = new ArrayList<Transaction>();
+		this.transactions = new TreeSet<Transaction>();
 	}
 
 	public void buy(int units, double pricePerUnit) {
@@ -28,7 +30,7 @@ public class Product {
 	}
 	
 	private void registerTransaction(TransactionType type, int units, double pricePerUnit) {
-		this.transactions.add(new Transaction(type, units, pricePerUnit));
+		this.transactions.add(new Transaction(type, units, pricePerUnit, LocalDateTime.now()));
 	}
 	
 	public String getName() {
@@ -48,8 +50,10 @@ public class Product {
 	}
 	
 	public List<Transaction> getTransactions(){
-		return this.transactions;
+		return new ArrayList<>(transactions);
 	}
 	
-	
+	public List<Transaction> getTransactions(LocalDateTime from, LocalDateTime to){
+		return new ArrayList<>(transactions.subSet(Transaction.TransactionWithDate(from), Transaction.TransactionWithDate(to)));
+	}
 }

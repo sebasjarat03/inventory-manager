@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -109,11 +110,25 @@ public class InventoryController {
 		            setStyle("");
 		        } else if (item.getType().equals("BUY")) {
 		            setStyle("-fx-background-color: #bfffd0;");
+		            setText("");
+		            
 		        } else {
 		        	setStyle("-fx-background-color: #ffbfca;");
 		        }
 		    }
 		});
+		
+//		unitCol.setCellFactory(tv -> new TableCell<Transaction, Integer>() {
+//		    @Override
+//		    public void updateItem(Integer item, boolean empty) {
+//		        super.updateItem(item, empty) ;
+//		        if (item == null) {
+//		            setStyle("");
+//		        } else if (item == 0) {
+//		            setText("");
+//		        }
+//		    }
+//		});
 	}
 
 }

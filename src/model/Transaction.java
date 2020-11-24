@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 
-public class Transaction {
+public class Transaction implements Comparable<Transaction>{
 	
 	public enum TransactionType{
 		BUY,
@@ -14,17 +14,19 @@ public class Transaction {
 	private LocalDateTime date;
 	private double pricePerUnit;
 	
-	//I dont think we need this constructor
 	public Transaction(TransactionType type, int units, double pricePerUnit, LocalDateTime date) {
+		this.type = type;
 		this.units = units;
 		this.pricePerUnit = pricePerUnit;
 		this.date = date;
 	}
 	
-	public Transaction(TransactionType type, int units, double pricePerUnit) {
-		this.type = type;
-		this.units = units;
-		this.pricePerUnit = pricePerUnit;
+	//This is to get subsets from a TreeSet, a bit hacky but it works ;).
+	public static Transaction TransactionWithDate(LocalDateTime date) {
+		return new Transaction(date);
+	}
+	private Transaction(LocalDateTime date) {
+		this.date = date;
 	}
 
 	public String getType() {
@@ -46,9 +48,10 @@ public class Transaction {
 	public double getTotalPrice() {
 		return pricePerUnit*units;
 	}
-	
-	
-	
-	
 
+	@Override
+	public int compareTo(Transaction o) {
+		return this.date.compareTo(o.date);
+	}
+	
 }
