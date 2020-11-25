@@ -20,7 +20,7 @@
                       <TableColumn fx:id="nameCol" prefWidth="88.0" text="Concepto" />
                       <TableColumn fx:id="unitCol" minWidth="0.0" prefWidth="69.0" text="Unidades" />
                         <TableColumn fx:id="unitPriceCol" prefWidth="96.0" text="Costo unitario" />
-                        <TableColumn fx:id="totalPriceCol" prefWidth="83.0" text="Costo total" />
+                        <TableColumn fx:id="totalCostCol" prefWidth="83.0" text="Costo total" />
                         <TableColumn fx:id="unitCol2" prefWidth="79.0" text="Unidades" />
                         <TableColumn fx:id="unitPriceCol2" prefWidth="91.0" text="Costo unitario" />
                         <TableColumn fx:id="totalPriceCol2" prefWidth="88.0" text="Costo total" />

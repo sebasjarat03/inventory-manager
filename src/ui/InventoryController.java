@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -45,10 +44,10 @@ public class InventoryController {
 	private TableColumn<Transaction, Double> unitPriceCol;
 	
 	@FXML
-    private TableColumn<Transaction, Double> totalPriceCol;
+    private TableColumn<Transaction, Double> totalCostCol;
 	
 	@FXML
-    private TableColumn<Transaction, Integer> unitCol2;
+    private TableColumn<Transaction, Integer> totalUnitCol;
 
     @FXML
     private TableColumn<Transaction, Double> unitPriceCol2;
@@ -84,7 +83,7 @@ public class InventoryController {
 		nameCol.setCellValueFactory(new PropertyValueFactory<>("type"));
 		unitCol.setCellValueFactory(new PropertyValueFactory<>("units"));
 		unitPriceCol.setCellValueFactory(new PropertyValueFactory<>("pricePerUnit"));
-		totalPriceCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+		totalCostCol.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
 	}
 	
 	public void actualizeTV(String product) {
@@ -126,18 +125,6 @@ public class InventoryController {
 		        }
 		    }
 		});
-		
-//		unitCol.setCellFactory(tv -> new TableCell<Transaction, Integer>() {
-//		    @Override
-//		    public void updateItem(Integer item, boolean empty) {
-//		        super.updateItem(item, empty) ;
-//		        if (item == null) {
-//		            setStyle("");
-//		        } else if (item == 0) {
-//		            setText("");
-//		        }
-//		    }
-//		});
 	}
 
 }

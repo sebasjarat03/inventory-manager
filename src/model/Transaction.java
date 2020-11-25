@@ -45,7 +45,7 @@ public class Transaction implements Comparable<Transaction>{
 		return pricePerUnit;
 	}
 	
-	public double getTotalPrice() {
+	public double getTotalCost() {
 		return pricePerUnit*units;
 	}
 
