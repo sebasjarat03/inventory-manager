@@ -1,12 +1,11 @@
 package model;
 
-public class Item {
+public class Item implements Info{
 
 	private int units;
 	private double pricePerUnit;
 	
 	public Item(int units, double pricePerUnit) {
-		super();
 		this.units = units;
 		this.pricePerUnit = pricePerUnit;
 	}
@@ -30,5 +29,15 @@ public class Item {
 	
 	public double getPricePerUnit() {
 		return this.pricePerUnit;
+	}
+
+	@Override
+	public String getType() {
+		return "";
+	}
+
+	@Override
+	public int getUnits() {
+		return units;
 	}
 }

@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 
-public class Transaction implements Comparable<Transaction>{
+public class Transaction implements Info{
 	
 	public enum TransactionType{
 		BUY,
@@ -47,11 +47,6 @@ public class Transaction implements Comparable<Transaction>{
 	
 	public double getTotalCost() {
 		return pricePerUnit*units;
-	}
-
-	@Override
-	public int compareTo(Transaction o) {
-		return this.date.compareTo(o.date);
 	}
 	
 }

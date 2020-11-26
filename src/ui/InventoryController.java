@@ -13,9 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Info;
 import model.Inventory;
-import model.Product;
-import model.Transaction;
 import ui.productsoperations.BuyProductController;
 import ui.productsoperations.SellProductController;
 
@@ -32,19 +31,19 @@ public class InventoryController {
 	private SellProductController spc;
 
 	@FXML
-	private TableView<Transaction> prodTable;
+	private TableView<Info> prodTable;
 
 	@FXML
-	private TableColumn<Transaction, String> nameCol;
+	private TableColumn<Info, String> nameCol;
 
 	@FXML
-	private TableColumn<Transaction, Integer> unitCol;
+	private TableColumn<Info, Integer> unitCol;
 
 	@FXML
-	private TableColumn<Transaction, Double> unitPriceCol;
+	private TableColumn<Info, Double> unitPriceCol;
 	
 	@FXML
-    private TableColumn<Transaction, Double> totalCostCol;
+    private TableColumn<Info, Double> totalCostCol;
 
 	@FXML
 	private JFXButton buyBut;
@@ -76,16 +75,15 @@ public class InventoryController {
 		unitPriceCol.setCellValueFactory(new PropertyValueFactory<>("pricePerUnit"));
 		totalCostCol.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
 	}
-	
-	public void actualizeTV(String product) {
-		if(inventory.getProduct(product)!=null) {
-			Product p = inventory.getProduct(product);
 
-			ObservableList<Transaction> data = FXCollections.observableArrayList(p.getTransactions());
-			prodTable.getItems().setAll(data);
-		}
+	public void actualizeTV(String product) {
+		if(inventory.getProduct(product)!=null) 
+			return;
+
+		ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(product).getTransactions());
+		prodTable.getItems().setAll(data);
 	}
-	
+
 	public void actualizeProducts() {
 		productsChoice.getItems().setAll(inventory.getStockString());
 	}
@@ -101,9 +99,9 @@ public class InventoryController {
 			}
 		});
 		
-		prodTable.setRowFactory(tv -> new TableRow<Transaction>() {
+		prodTable.setRowFactory(tv -> new TableRow<Info>() {
 		    @Override
-		    public void updateItem(Transaction item, boolean empty) {
+		    public void updateItem(Info item, boolean empty) {
 		        super.updateItem(item, empty) ;
 		        if (item == null) {
 		            setStyle("");
