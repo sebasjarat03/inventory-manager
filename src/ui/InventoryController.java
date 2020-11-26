@@ -86,8 +86,9 @@ public class InventoryController {
 		if(inventory.getProduct(product) == null) 
 			return;
 
-		ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(product).getTransactions());
+		ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(product).getTransactionsFIFO());
 		prodTable.getItems().addAll(data);
+//		productsChoice.getSelectionModel().select(product);
 	}
 
 	public void actualizeProducts() {
@@ -140,7 +141,9 @@ public class InventoryController {
 			}
 		}
 		
-		tpc = new TotalsPepsController(totalUnitsBuy, totalBuyPrice, totalUnitsSell, totalSellPrice, 0, 0);
+		tpc = new TotalsPepsController(totalUnitsBuy, totalBuyPrice, totalUnitsSell, totalSellPrice, 
+				inventory.getProduct(productsChoice.getSelectionModel().getSelectedItem()).getUnits(), 
+				inventory.getProduct(productsChoice.getSelectionModel().getSelectedItem()).calcTotalValueInventory());
 		tpc.totalWindow();
 	}
 	

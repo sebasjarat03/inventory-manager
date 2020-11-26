@@ -11,6 +11,14 @@ public class Item implements Info{
 		this.pricePerUnit = pricePerUnit;
 	}
 	
+	public void setUnits(int units) {
+		this.units = units;
+	}
+
+	public void setPricePerUnit(double pricePerUnit) {
+		this.pricePerUnit = pricePerUnit;
+	}
+
 	public Item(Item i) {
 		this.units = i.units;
 		this.pricePerUnit = i.pricePerUnit;

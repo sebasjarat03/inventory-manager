@@ -71,7 +71,7 @@ public class TotalsPepsController {
     	totalEmtradas.setText(totalBuyPrice + "");
     	outsQuantitys.setText(totalSellUnits + "");
     	totOurs.setText(totalSellPrice + "");
-    	unitsInv.setText(unitsInv + "");
+    	unitsInv.setText(invUnits + "");
     	totCostInv.setText(invPrice + "");
 	}
 

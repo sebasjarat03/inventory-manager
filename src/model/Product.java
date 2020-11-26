@@ -2,8 +2,6 @@ package model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.TreeSet;
 
 import model.Transaction.TransactionType;
@@ -15,6 +13,8 @@ public class Product {
 	private TreeSet<Transaction> transactions;
 	private ArrayList<Item> items;
 	
+	//Pondered Average
+	private Item item;
 	
 	public Product(String name, int units) {
 		super();
@@ -22,51 +22,58 @@ public class Product {
 		this.units = units;
 		this.transactions = new TreeSet<Transaction>();
 		this.items = new ArrayList<Item>();
+		
+		item = new Item(0, 0);
 	}
 
-	public void buy(int units, double pricePerUnit) {
+	public void buy(int units, double pricePerUnit, boolean paMode) {
 		this.units += units;
 
 		boolean exist = false;
 
-		for(Item i: items) {
-			if(i.getPricePerUnit() == pricePerUnit) {
-				i.addUnits(units);
-				exist = true;
-				break;
+		if(paMode) {
+			double newPrice = ((units*pricePerUnit) + item.getUnits()*item.getPricePerUnit()) / ((double) units + item.getUnits());
+			item.setPricePerUnit(newPrice);
+			item.addUnits(units);
+		}else {
+			for(Item i: items) {
+				if(i.getPricePerUnit() == pricePerUnit) {
+					i.addUnits(units);
+					exist = true;
+					break;
+				}
 			}
+			if(!exist)
+				items.add(new Item(units, pricePerUnit));
 		}
-
-		if(!exist)
-			items.add(new Item(units, pricePerUnit));
-
-
+		
 		registerTransaction(TransactionType.BUY, units, pricePerUnit);
 	}
-	public boolean sell(int units) {
+	public boolean sell(int units, boolean paMode) {
 		if(this.units < units)
 			return false;
 
 		this.units -= units; //Here we're already sure we can sell this amount;
 		
-		for(Item i: items) {
-			int left = i.sellUnits(units);
+		if(paMode) {
+			item.sellUnits(units);
+			registerTransaction(TransactionType.SELL, units, item.getPricePerUnit());
 			
-			if(left >= 0) { //Available units were more or equal that the amount sell
-				System.out.println("more");
-				registerTransaction(TransactionType.SELL, units, i.getPricePerUnit());
-				System.out.println("Vendido: " + (units) + " a " + i.getPricePerUnit());
-				break;
-			}else {
-				System.out.println("less");
-				//Left is negative here
-				registerTransaction(TransactionType.SELL, units + left, i.getPricePerUnit());
-				System.out.println("Vendido: " + (units + left) + " a " + i.getPricePerUnit());
-				units = Math.abs(left);
+		}else {
+			for(Item i: items) {
+				int left = i.sellUnits(units);
+				
+				if(left >= 0) { //Available units were more or equal that the amount sell
+					registerTransaction(TransactionType.SELL, units, i.getPricePerUnit());
+					break;
+				}else {
+					//Left is negative here
+					registerTransaction(TransactionType.SELL, units + left, i.getPricePerUnit());
+					units = Math.abs(left);
+				}
 			}
 		}
-
-		System.out.println("------------------");
+		
 		cleanEmptyItems();
 		return true;
 	}
@@ -86,7 +93,6 @@ public class Product {
 	}
 	
 	private void registerTransaction(TransactionType type, int units, double pricePerUnit) {
-		System.out.println("Transaction registrada");
 		this.transactions.add(new Transaction(type, units, pricePerUnit, LocalDateTime.now()));
 	}
 	
@@ -106,7 +112,15 @@ public class Product {
 		this.units = units;
 	}
 	
-	public ArrayList<Info> getTransactions(){
+	public double calcTotalValueInventory() {
+		double total = 0;
+		for(Item i: items) {
+			total += i.getPricePerUnit()*i.getUnits();
+		}
+		
+		return total;
+	}
+	public ArrayList<Info> getTransactionsFIFO(){
 		ArrayList<Info> aux = new ArrayList<>(transactions);
 		aux.addAll(copyOfItems());
 		
@@ -123,7 +137,11 @@ public class Product {
 		return aux;
 	}
 	
-	public List<Transaction> getTransactions(LocalDateTime from, LocalDateTime to){
-		return new ArrayList<>(transactions.subSet(Transaction.TransactionWithDate(from), Transaction.TransactionWithDate(to)));
+	public ArrayList<Info> getTransactionsPA(){
+		ArrayList<Info> aux = new ArrayList<>(transactions);
+		aux.addAll(copyOfItems());
+		
+		transactions.clear();
+		return aux;
 	}
 }
