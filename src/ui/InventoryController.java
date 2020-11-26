@@ -104,6 +104,7 @@ public class InventoryController {
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				if(arg2!=null) {
+					prodTable.getItems().clear();
 					actualizeTV(arg2);
 				}
 			}

@@ -39,7 +39,7 @@ public class Item implements Info{
 
 	@Override
 	public String getType() {
-		return "";
+		return "SALDOS";
 	}
 
 	@Override
