@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -12,6 +13,8 @@ public class Product {
 	private String name;
 	private int units;
 	private TreeSet<Transaction> transactions;
+	private ArrayList<Item> items;
+	
 	
 	public Product(String name, int units) {
 		super();
@@ -22,11 +25,40 @@ public class Product {
 
 	public void buy(int units, double pricePerUnit) {
 		this.units += units;
+		
+		if(items.contains(pricePerUnit)) {
+			for(Item i: items) {
+				if(i.equals(pricePerUnit)) {
+					i.addUnits(units);
+					break;
+				}
+			}
+		}else {
+			items.add(new Item(units, pricePerUnit));
+		}
+		
 		registerTransaction(TransactionType.BUY, units, pricePerUnit);
 	}
-	public void sell(int units, double pricePerUnit) {
-		this.units -= units;
-		registerTransaction(TransactionType.SELL, units, pricePerUnit);
+	public boolean sell(int units) {
+		if(this.units < units)
+			return false;
+
+		this.units -= units; //Here we're already sure we can sell this amount;
+		
+		for(Item i: items) {
+			int left = i.sellUnits(units);
+			
+			if(left >= 0) { //Available units were more or equal that the amount sell
+				registerTransaction(TransactionType.SELL, units, i.getPricePerUnit());
+				break;
+			}else {
+				//Left is negative here
+				registerTransaction(TransactionType.SELL, units + left, i.getPricePerUnit());
+				units = -left;
+			}
+		}
+
+		return true;
 	}
 	
 	private void registerTransaction(TransactionType type, int units, double pricePerUnit) {

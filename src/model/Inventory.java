@@ -34,16 +34,13 @@ public class Inventory {
 			stock.put(productName, p);
 		}
 	}
-	public boolean sell(String productName, int units, double pricePerUnit) {
+	public boolean sell(String productName, int units) {
 		if(!isInStock(productName)) 
 			return false;
 		
 		Product p = stock.get(productName);
 		
-		if(p.getUnits() < units)
-			return false;
-		
-		p.sell(units, pricePerUnit);
+		p.sell(units);
 		
 		return true;
 	}

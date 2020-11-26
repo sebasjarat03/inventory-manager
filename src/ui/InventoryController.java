@@ -118,8 +118,6 @@ public class InventoryController {
 		            setStyle("");
 		        } else if (item.getType().equals("BUY")) {
 		            setStyle("-fx-background-color: #bfffd0;");
-		            setText("");
-		            
 		        } else {
 		        	setStyle("-fx-background-color: #ffbfca;");
 		        }
