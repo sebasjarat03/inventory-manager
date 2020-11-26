@@ -40,9 +40,7 @@ public class Inventory {
 		
 		Product p = stock.get(productName);
 		
-		p.sell(units);
-		
-		return true;
+		return p.sell(units);
 	}
 	private boolean isInStock(String productName) {
 		return stock.containsKey(productName);

@@ -1,5 +1,7 @@
 package ui;
 
+import java.util.ArrayList;
+
 import com.jfoenix.controls.JFXButton;
 
 import javafx.beans.value.ChangeListener;
@@ -82,7 +84,7 @@ public class InventoryController {
 			return;
 
 		ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(product).getTransactions());
-		prodTable.getItems().setAll(data);
+		prodTable.getItems().addAll(data);
 	}
 
 	public void actualizeProducts() {

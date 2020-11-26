@@ -1,5 +1,6 @@
 package model;
 
+
 public class Item implements Info{
 
 	private int units;
@@ -10,6 +11,11 @@ public class Item implements Info{
 		this.pricePerUnit = pricePerUnit;
 	}
 	
+	public Item(Item i) {
+		this.units = i.units;
+		this.pricePerUnit = i.pricePerUnit;
+	}
+	
 	public void addUnits(int units) {
 		this.units += units;
 	}
@@ -17,14 +23,6 @@ public class Item implements Info{
 	public int sellUnits(int units) {
 		this.units -= units;
 		return this.units;
-	}
-	
-	public boolean equals(Item i) {
-		return this.pricePerUnit == i.pricePerUnit;
-	}
-	
-	public boolean equals(double d) {
-		return this.pricePerUnit == d;
 	}
 	
 	public double getPricePerUnit() {
