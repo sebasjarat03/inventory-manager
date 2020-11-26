@@ -90,30 +90,35 @@ public class InventoryController {
 			return;
 
 		
-		if(productsChoice.getSelectionModel().getSelectedItem()==null ||!productsChoice.getSelectionModel().getSelectedItem().equals(product)) {
+		if(productsChoice.getSelectionModel().getSelectedItem()==null || !productsChoice.getSelectionModel().getSelectedItem().equals(product)) {
 			productsChoice.getSelectionModel().select(product);
+			ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(product).getTransactions());
+			prodTable.getItems().setAll(data);
+			System.out.println("assssssssssssssssssssss");
 			return;
 		}
+		
 		ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(product).getTransactions());
 		prodTable.getItems().addAll(data);
-		//		productsChoice.getSelectionModel().select(product);
 	}
 
-	public void actualizeProducts() {
+	public void actualizeProducts(String proud) {
 		productsChoice.getItems().setAll(inventory.getStockString());
+		productsChoice.getSelectionModel().select(proud);
 	}
 	
 	public void initialize() {
-		productsChoice.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
-			@Override
-			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				if( !arg2.equalsIgnoreCase(arg1) ) {
-					ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(arg2).getTransactions());
-					prodTable.getItems().setAll(data);
-				}
-			}
-		});
+//		productsChoice.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+//
+//			@Override
+//			public void changed(ObservableValue<? extends String> arg0, String oldVal, String newVal) {
+//				if(newVal != null && !newVal.equalsIgnoreCase(oldVal)) {
+//					ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(newVal).getTransactions());
+//					prodTable.getItems().setAll(data);
+//					System.out.println("Here: " + newVal + " " + oldVal);
+//				}
+//			}
+//		});
 		
 		prodTable.setRowFactory(tv -> new TableRow<Info>() {
 		    @Override

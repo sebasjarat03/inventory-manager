@@ -50,8 +50,8 @@ public class BuyProductController {
     	int amount = Integer.parseInt(unitsNumField.getText());
     	double pricePerUnit = Double.parseDouble(unitPriceField.getText());
     	inventory.buy(productName, amount, pricePerUnit, paMode);
-    	ic.actualizeProducts();
     	ic.actualizeTV(productName);
+    	ic.actualizeProducts(productName);
     	menuProducts.getSelectionModel().clearSelection();
     	unitsNumField.setText("");
     	unitPriceField.setText("");

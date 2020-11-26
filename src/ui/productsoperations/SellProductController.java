@@ -48,8 +48,8 @@ public class SellProductController {
 		String productName = menuProducts.getSelectionModel().getSelectedItem();
     	int amount = Integer.parseInt(unitsNumField.getText());
     	inventory.sell(productName, amount, paMode);
-    	ic.actualizeProducts();
     	ic.actualizeTV(productName);
+    	ic.actualizeProducts(productName);
     	menuProducts.getSelectionModel().clearSelection();
     	unitsNumField.setText("");
 
