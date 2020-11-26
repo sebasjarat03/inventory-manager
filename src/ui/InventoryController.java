@@ -42,6 +42,10 @@ public class InventoryController {
 	private TableColumn<Info, String> nameCol;
 
 	@FXML
+	private JFXButton updateTbBut;
+
+
+	@FXML
 	private TableColumn<Info, Integer> unitCol;
 
 	@FXML
@@ -107,7 +111,15 @@ public class InventoryController {
 		productsChoice.getSelectionModel().select(proud);
 	}
 	
+	@FXML
+    void updateTbAct(ActionEvent event) {
+		prodTable.getItems().clear();
+		actualizeTV(productsChoice.getSelectionModel().getSelectedItem());
+
+    }
+	
 	public void initialize() {
+		
 //		productsChoice.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 //
 //			@Override
