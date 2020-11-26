@@ -17,6 +17,7 @@ import model.Info;
 import model.Inventory;
 import ui.productsoperations.BuyProductController;
 import ui.productsoperations.SellProductController;
+import ui.productsoperations.TotalsPepsController;
 
 public class InventoryController {
 
@@ -29,6 +30,8 @@ public class InventoryController {
 	private BuyProductController bpc;
 	
 	private SellProductController spc;
+	
+	private TotalsPepsController tpc;
 
 	@FXML
 	private TableView<Info> prodTable;
@@ -53,6 +56,9 @@ public class InventoryController {
 	
     @FXML
     private ChoiceBox<String> productsChoice;
+    
+    @FXML
+    private JFXButton showTotalsBut;
 
 	@FXML
 	void buyAct(ActionEvent event) {
@@ -134,6 +140,14 @@ public class InventoryController {
 			}
 		}
 		
+		tpc = new TotalsPepsController(totalUnitsBuy, totalBuyPrice, totalUnitsSell, totalSellPrice, 0, 0);
+		tpc.totalWindow();
 	}
+	
+	@FXML
+    public void showTotalsAct(ActionEvent event) {
+		calculateTotalsFIFO();
+
+    }
 
 }

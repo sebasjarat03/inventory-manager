@@ -44,6 +44,11 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </ChoiceBox>
+                  <JFXButton fx:id="showTotalsBut" onAction="#showTotalsAct" prefHeight="31.0" prefWidth="149.0" style="-fx-background-color: #c4cacc;" text="Mostrar Totales">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </JFXButton>
                </children>
             </VBox>
          </right>
