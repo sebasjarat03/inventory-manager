@@ -111,16 +111,21 @@ public class Product {
 	public void setUnits(int units) {
 		this.units = units;
 	}
-	
-	public double calcTotalValueInventory() {
+
+	public double calcTotalValueInventory(boolean paMode) {
 		double total = 0;
-		for(Item i: items) {
-			total += i.getPricePerUnit()*i.getUnits();
+
+		if(paMode) {
+			total = item.getPricePerUnit()*item.getUnits();
 		}
-		
+		else {
+			for(Item i: items) {
+				total += i.getPricePerUnit()*i.getUnits();
+			}
+		}
 		return total;
 	}
-	public ArrayList<Info> getTransactionsFIFO(){
+	public ArrayList<Info> getTransactions(){
 		ArrayList<Info> aux = new ArrayList<>(transactions);
 		aux.addAll(copyOfItems());
 		
@@ -134,14 +139,6 @@ public class Product {
 			aux.add(new Item(i));
 		}
 		
-		return aux;
-	}
-	
-	public ArrayList<Info> getTransactionsPA(){
-		ArrayList<Info> aux = new ArrayList<>(transactions);
-		aux.addAll(copyOfItems());
-		
-		transactions.clear();
 		return aux;
 	}
 }

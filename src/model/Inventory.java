@@ -50,10 +50,6 @@ public class Inventory {
 		return registeredProducts;
 	}
 	
-	public List<Product> getStockProducts(){
-		List<Product> aux2 = stock.values().stream().collect(Collectors.toList());
-		return aux2;
-	}
 	public List<String> getStockString(){
 		List<String> aux = stock.keySet().stream().collect(Collectors.toList());
 		aux.sort(new Comparator<String>() {
@@ -65,16 +61,6 @@ public class Inventory {
 		return aux;
 	}
 	
-	public List<Product> getSellableProducts(){
-		List<Product> aux2 = stock.values().stream()
-				.filter(p -> p.getUnits() > 0)
-				.collect(Collectors.toList());
-		return aux2;
-	}
-	public List<String> getSellableString(){
-		List<String> aux = getSellableProducts().stream().map(Product::getName).collect(Collectors.toList());
-		return aux;
-	}
 	
 	public Product getProduct(String name) {
 		return stock.get(name);
