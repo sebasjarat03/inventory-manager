@@ -10,7 +10,7 @@ public class Product {
 	
 	private String name;
 	private int units;
-	private TreeSet<Transaction> transactions;
+	private ArrayList<Transaction> transactions;
 	private ArrayList<Item> items;
 	
 	//Pondered Average
@@ -20,7 +20,7 @@ public class Product {
 		super();
 		this.name = name;
 		this.units = units;
-		this.transactions = new TreeSet<Transaction>();
+		this.transactions = new ArrayList<Transaction>();
 		this.items = new ArrayList<Item>();
 		
 		item = new Item(0, 0);
