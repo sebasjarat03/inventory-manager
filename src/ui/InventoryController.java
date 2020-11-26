@@ -89,9 +89,14 @@ public class InventoryController {
 		if(inventory.getProduct(product) == null) 
 			return;
 
+		
+		if(productsChoice.getSelectionModel().getSelectedItem()==null ||!productsChoice.getSelectionModel().getSelectedItem().equals(product)) {
+			productsChoice.getSelectionModel().select(product);
+			return;
+		}
 		ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(product).getTransactions());
 		prodTable.getItems().addAll(data);
-//		productsChoice.getSelectionModel().select(product);
+		//		productsChoice.getSelectionModel().select(product);
 	}
 
 	public void actualizeProducts() {
@@ -103,9 +108,9 @@ public class InventoryController {
 
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				if(arg2!=null) {
-					prodTable.getItems().clear();
-					actualizeTV(arg2);
+				if( !arg2.equalsIgnoreCase(arg1) ) {
+					ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(arg2).getTransactions());
+					prodTable.getItems().setAll(data);
 				}
 			}
 		});
