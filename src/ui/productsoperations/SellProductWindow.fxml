@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <BorderPane>
          <top>
-            <Pane prefHeight="509.0" prefWidth="550.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="300.0" prefWidth="500.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="116.0" layoutY="169.0" text="Seleccione el producto:" />
-                  <ChoiceBox fx:id="menuProducts" layoutX="293.0" layoutY="164.0" prefWidth="150.0" />
-                  <Label layoutX="83.0" layoutY="232.0" text="Unidades que desea vender:" />
-                  <JFXTextField fx:id="unitsNumField" layoutX="293.0" layoutY="227.0" />
-                  <JFXButton fx:id="sellBut" layoutX="237.0" layoutY="429.0" onAction="#sellAct" prefHeight="31.0" prefWidth="76.0" style="-fx-background-color: #c4cacc#c4cacc;" text="Vender" />
+                  <Label layoutX="103.0" layoutY="80.0" text="Seleccione el producto:" />
+                  <ChoiceBox fx:id="menuProducts" layoutX="280.0" layoutY="75.0" prefWidth="150.0" />
+                  <Label layoutX="70.0" layoutY="143.0" text="Unidades que desea vender:" />
+                  <JFXTextField fx:id="unitsNumField" layoutX="280.0" layoutY="138.0" />
+                  <JFXButton fx:id="sellBut" layoutX="212.0" layoutY="218.0" onAction="#sellAct" prefHeight="31.0" prefWidth="76.0" style="-fx-background-color: #c4cacc#c4cacc;" text="Vender" />
                </children>
             </Pane>
          </top>
