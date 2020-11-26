@@ -1,7 +1,5 @@
 package ui;
 
-import java.util.ArrayList;
-
 import com.jfoenix.controls.JFXButton;
 
 import javafx.beans.value.ChangeListener;
@@ -10,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -118,6 +115,25 @@ public class InventoryController {
 		        }
 		    }
 		});
+	}
+	
+	private void calculateTotalsFIFO() {
+		int totalUnitsBuy = 0;
+		double totalBuyPrice = 0;
+		
+		int totalUnitsSell = 0;
+		double totalSellPrice = 0;
+		
+		for(Info row: prodTable.getItems()) {
+			if(row.getType().equals("BUY")) {
+				totalUnitsBuy += row.getUnits();
+				totalBuyPrice += row.getPricePerUnit()*row.getUnits();
+			}else if(row.getType().equals("SELL")) {
+				totalUnitsSell += row.getUnits();
+				totalSellPrice += row.getPricePerUnit()*row.getUnits();
+			}
+		}
+		
 	}
 
 }
