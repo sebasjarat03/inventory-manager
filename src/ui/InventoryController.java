@@ -82,9 +82,7 @@ public class InventoryController {
 		unitCol.setCellValueFactory(new PropertyValueFactory<>("units"));
 		unitPriceCol.setCellValueFactory(new PropertyValueFactory<>("pricePerUnit"));
 		totalCostCol.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
-		if (paMode) {
-			showTotalsBut.setVisible(false);
-		}
+		
 	}
 
 	public void actualizeTV(String product) {
