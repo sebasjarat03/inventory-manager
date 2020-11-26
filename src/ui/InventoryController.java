@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -107,8 +108,11 @@ public class InventoryController {
 		            setStyle("");
 		        } else if (item.getType().equals("BUY")) {
 		            setStyle("-fx-background-color: #bfffd0;");
-		        } else {
+		        } else if (item.getType().equals("SELL")){
 		        	setStyle("-fx-background-color: #ffbfca;");
+		        } else {
+		        	setStyle("-fx-background-color: #b4dffa;");
+		        	setPadding(new Insets(0, 0, 0, 10));
 		        }
 		    }
 		});

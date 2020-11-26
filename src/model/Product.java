@@ -21,6 +21,7 @@ public class Product {
 		this.name = name;
 		this.units = units;
 		this.transactions = new TreeSet<Transaction>();
+		this.items = new ArrayList<Item>();
 	}
 
 	public void buy(int units, double pricePerUnit) {
@@ -58,7 +59,16 @@ public class Product {
 			}
 		}
 
+		cleanEmptyItems();
 		return true;
+	}
+	
+	private void cleanEmptyItems() {
+		for(Item i: items) {
+			if(i.getUnits() <= 0) {
+				items.remove(i);
+			}
+		}
 	}
 	
 	private void registerTransaction(TransactionType type, int units, double pricePerUnit) {
@@ -81,8 +91,10 @@ public class Product {
 		this.units = units;
 	}
 	
-	public List<Transaction> getTransactions(){
-		return new ArrayList<>(transactions);
+	public List<Info> getTransactions(){
+		ArrayList<Info> aux = new ArrayList<>(transactions);
+		aux.addAll(items);
+		return aux;
 	}
 	
 	public List<Transaction> getTransactions(LocalDateTime from, LocalDateTime to){
