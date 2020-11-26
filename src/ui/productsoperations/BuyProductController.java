@@ -19,12 +19,14 @@ import ui.InventoryController;
 public class BuyProductController {
 	private Inventory inventory;
 	private InventoryController ic;
+	private boolean paMode;
 	
 	VBox buyProductPane;
 	
-	public BuyProductController(Inventory inventory, InventoryController ic) {
+	public BuyProductController(Inventory inventory, InventoryController ic, boolean paMode) {
 		this.inventory = inventory;
 		this.ic = ic;
+		this.paMode = paMode;
 	}
 
 	@FXML
@@ -47,7 +49,7 @@ public class BuyProductController {
     	String productName = menuProducts.getSelectionModel().getSelectedItem();
     	int amount = Integer.parseInt(unitsNumField.getText());
     	double pricePerUnit = Double.parseDouble(unitPriceField.getText());
-    	inventory.buy(productName, amount, pricePerUnit);
+    	inventory.buy(productName, amount, pricePerUnit, paMode);
     	ic.actualizeProducts();
     	ic.actualizeTV(productName);
     	menuProducts.getSelectionModel().clearSelection();

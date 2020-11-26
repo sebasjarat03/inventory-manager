@@ -20,10 +20,12 @@ public class SellProductController {
 	
 	private Inventory inventory;
 	private InventoryController ic;
+	private boolean paMode;
 	
-	public SellProductController(Inventory inventory, InventoryController ic) {
+	public SellProductController(Inventory inventory, InventoryController ic, boolean paMode) {
 		this.inventory = inventory;
 		this.ic = ic;
+		this.paMode = paMode;
 	}
 	
 	@FXML
@@ -45,7 +47,7 @@ public class SellProductController {
 	void sellAct(ActionEvent event) {
 		String productName = menuProducts.getSelectionModel().getSelectedItem();
     	int amount = Integer.parseInt(unitsNumField.getText());
-    	inventory.sell(productName, amount);
+    	inventory.sell(productName, amount, paMode);
     	ic.actualizeProducts();
     	ic.actualizeTV(productName);
     	menuProducts.getSelectionModel().clearSelection();

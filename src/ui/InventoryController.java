@@ -22,9 +22,11 @@ import ui.productsoperations.TotalsPepsController;
 public class InventoryController {
 
 	private Inventory inventory;
+	private boolean paMode;
 
 	public InventoryController(Inventory inventory) {
 		this.inventory = inventory;
+		
 	}
 
 	private BuyProductController bpc;
@@ -62,14 +64,14 @@ public class InventoryController {
 
 	@FXML
 	void buyAct(ActionEvent event) {
-		bpc = new BuyProductController(inventory, this);
+		bpc = new BuyProductController(inventory, this, paMode);
 		bpc.buyProduct();
 
 	}
 
 	@FXML
 	void sellAct(ActionEvent event) {
-		spc = new SellProductController(inventory, this);
+		spc = new SellProductController(inventory, this, paMode);
 		spc.sellProduct();
 	}
 	
@@ -80,6 +82,9 @@ public class InventoryController {
 		unitCol.setCellValueFactory(new PropertyValueFactory<>("units"));
 		unitPriceCol.setCellValueFactory(new PropertyValueFactory<>("pricePerUnit"));
 		totalCostCol.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
+		if (paMode) {
+			showTotalsBut.setVisible(false);
+		}
 	}
 
 	public void actualizeTV(String product) {
@@ -122,6 +127,10 @@ public class InventoryController {
 		        }
 		    }
 		});
+	}
+	
+	public void setPaMode(boolean paMode) {
+		this.paMode = paMode;
 	}
 	
 	private void calculateTotalsFIFO() {

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton fx:id="pepsBut" layoutX="374.0" layoutY="200.0" onAction="#pepsAct" style="-fx-background-color: #c4cacc;" text="PEPS" />
+      <JFXButton fx:id="ppBut" layoutX="305.0" layoutY="294.0" onAction="#ppAct" style="-fx-background-color: #c4cacc;" text="PROMEDIO PONDERADO" />
+   </children>
+</Pane>
