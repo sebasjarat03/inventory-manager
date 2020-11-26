@@ -78,7 +78,7 @@ public class InventoryController {
 	}
 
 	public void actualizeTV(String product) {
-		if(inventory.getProduct(product)!=null) 
+		if(inventory.getProduct(product) == null) 
 			return;
 
 		ObservableList<Info> data = FXCollections.observableArrayList(inventory.getProduct(product).getTransactions());
@@ -112,7 +112,7 @@ public class InventoryController {
 		        	setStyle("-fx-background-color: #ffbfca;");
 		        } else {
 		        	setStyle("-fx-background-color: #b4dffa;");
-		        	setPadding(new Insets(0, 0, 0, 10));
+//		        	setPadding(new Insets(0, 0, 0, 20));
 		        }
 		    }
 		});
