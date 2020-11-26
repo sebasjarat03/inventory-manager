@@ -45,15 +45,6 @@ public class InventoryController {
 	
 	@FXML
     private TableColumn<Transaction, Double> totalCostCol;
-	
-	@FXML
-    private TableColumn<Transaction, Integer> totalUnitCol;
-
-    @FXML
-    private TableColumn<Transaction, Double> unitPriceCol2;
-
-    @FXML
-    private TableColumn<Transaction, Double> totalPriceCol2;
 
 	@FXML
 	private JFXButton buyBut;

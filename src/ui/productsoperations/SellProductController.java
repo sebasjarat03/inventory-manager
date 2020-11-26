@@ -39,22 +39,17 @@ public class SellProductController {
 	private JFXTextField unitsNumField;
 
 	@FXML
-	private JFXTextField unitPriceField;
-
-	@FXML
 	private JFXButton sellBut;
 
 	@FXML
 	void sellAct(ActionEvent event) {
 		String productName = menuProducts.getSelectionModel().getSelectedItem();
     	int amount = Integer.parseInt(unitsNumField.getText());
-    	double pricePerUnit = Double.parseDouble(unitPriceField.getText());
-    	inventory.sell(productName, amount, pricePerUnit);
+    	inventory.sell(productName, amount);
     	ic.actualizeProducts();
     	ic.actualizeTV(productName);
     	menuProducts.getSelectionModel().clearSelection();
     	unitsNumField.setText("");
-    	unitPriceField.setText("");
 
 	}
 	
